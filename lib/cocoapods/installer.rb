@@ -561,7 +561,7 @@ module Pod
     #
     def install_libraries
       UI.message '- Installing targets' do
-        pod_targets.sort_by(&:name).each do |pod_target|
+        pod_targets.sort_by{ |target| target.name.downcase}.each do |pod_target|
           next if pod_target.target_definitions.flat_map(&:dependencies).empty?
           target_installer = PodTargetInstaller.new(sandbox, pod_target)
           target_installer.install!
